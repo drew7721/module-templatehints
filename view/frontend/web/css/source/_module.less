@@ -1,0 +1,32 @@
+/**
+ * Style for the template hint.
+ * @author Alex Ghiban <drew7721@gmail.com>
+ */
+.justinkase-hint {
+    position: relative;
+    border: dotted 1px @color-red9;
+    padding: 1px;
+    margin: 1px;
+    z-index: 1;
+
+    & > code:first-of-type {
+        color: @color-black_dark;
+        background-color: transparent;
+
+        &:hover {
+            background-color: @color-white;
+        }
+    }
+
+    &:hover {
+        z-index: 999;
+    }
+
+    & > .justinkase-hint {
+        margin: 0 1rem;
+
+        &:before {
+            content: "~";
+        }
+    }
+}
