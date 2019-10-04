@@ -12,14 +12,14 @@
     & > code:first-of-type {
         color: @color-black_dark;
         background-color: transparent;
-
-        &:hover {
-            background-color: @color-white;
-        }
     }
 
     &:hover {
         z-index: 999;
+
+        & > code:first-of-type {
+            background-color: @color-white;
+        }
     }
 
     & > .justinkase-hint {
