@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- @author Alex Ghiban <drew7721@gmail.com> -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="enableHints" type="JustinKase\LayoutHints\Console\Command\Hints">
+        <arguments>
+            <argument name="name" xsi:type="string">justinkase:hints:on</argument>
+            <argument name="description" xsi:type="string">Enable Hints</argument>
+            <argument name="setState" xsi:type="number">1</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="justinkase_hints_enable" xsi:type="object">enableHints</item>
+                <item name="justinkase_hints_disable" xsi:type="object">JustinKase\LayoutHints\Console\Command\Hints</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
