@@ -8,9 +8,23 @@ namespace JustinKase\LayoutHints\Plugin;
  *
  * @author Alex Ghiban <drew7721@gmail.com>
  */
-class BlockWrapper
+class BlockWrapper implements WrapperInterface
 {
-    const JK_TEMPLATE = '<div class="justinkase-hint"><code><strong>%s</strong> %s</code>%s</div>';
+    /**
+     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     */
+    protected $scopeConfig;
+
+    /**
+     * BlockWrapper constructor.
+     *
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     */
+    public function __construct(
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+    ) {
+        $this->scopeConfig = $scopeConfig;
+    }
 
     /**
      * @param \Magento\Framework\View\Element\Template $subject
@@ -22,11 +36,15 @@ class BlockWrapper
         \Magento\Framework\View\Element\Template $subject,
         $result
     ) {
-        return sprintf(
-            self::JK_TEMPLATE,
-            $subject->getNameInLayout(),
-            $subject->getTemplate(),
-            $result
-        );
+        if ($this->scopeConfig->getValue(self::JK_CONFIG_BLOCK_HINTS_STATUS)) {
+            $result = sprintf(
+                self::JK_TEMPLATE,
+                $subject->getNameInLayout(),
+                $subject->getTemplate(),
+                $result
+            );
+        }
+
+        return $result;
     }
 }
