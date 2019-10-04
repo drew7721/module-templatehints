@@ -1,0 +1,23 @@
+{
+    "name": "justinkase/module-layouthints",
+    "description":"",
+    "keywords": [
+        "magento 2",
+        "magento2"
+    ],
+    "require": {
+    },
+    "type": "magento2-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "JustinKase\\LayoutHints\\": ""
+        }
+    }
+}

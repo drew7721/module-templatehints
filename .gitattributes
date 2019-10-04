@@ -1,0 +1,75 @@
+# Set default behaviour, in case users don't have core.autocrlf set. Just 
+# force all text to have LF endings, because working in Vagrant, so same.
+
+* text eol=lf
+
+# Explicitly declare text files we want to always be normalized and converted 
+# to native Unix line endings on checkout.
+
+*.php text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.htm text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.sql text eol=lf
+*.log text eol=lf
+*.txt text eol=lf
+*.conf text eol=lf
+*.fcgi text eol=lf
+*.ini text eol=lf
+*.cnf text eol=lf
+*.csr text eol=lf
+*.crt text eol=lf
+*.key text eol=lf
+*.sh text eol=lf
+*.sh text eol=lf
+*.xml text eol=lf
+*.less text eol=lf
+*.scss text eol=lf
+*.md text eol=lf
+*yml text
+*.bat text eol=crlf
+
+# Denote all files that are truly binary and should not be modified. 
+# Unfortunately, there is no case ignore flag, which causes git to think files 
+# have been modified when cloned onto an OS with case-sensitivity, from a 
+# non-case-sensitive OS, like windows.
+
+*.png binary
+*.PNG binary
+*.jpg binary
+*.JPG binary
+*.jpeg binary
+*.JPEG binary
+*.gif binary
+*.GIF binary
+*.pdf binary
+*.psd binary
+*.ai binary
+*.eps binary
+*.ico binary
+*.rar binary
+*.zip binary
+*.gz binary
+*.tar binary
+*.bz2 binary
+*.tgz binary
+*.gpg binary
+*.pgp binary
+*.dll binary
+*.exe binary
+*.rtf binary
+*.docx binary
+*.doc binary
+*.jar binary
+*.cab binary
+*.dat binary
+*.so binary
+*.mp3 binary
+*.mp4 binary
+*.mkv binary
+*.ogg binary
+*.swf binary
+*.eot binary
+*.ttf binary
