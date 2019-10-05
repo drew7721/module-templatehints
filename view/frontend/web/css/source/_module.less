@@ -12,6 +12,15 @@
     & > code:first-of-type {
         color: @color-black_dark;
         background-color: transparent;
+        font-style: italic;
+    }
+
+    & > .justinkase-hint-classname:first-of-type {
+        position: absolute;
+        right: 0;
+        display: none;
+        background-color: @color-apricot;
+        color: @color-blue-pure;
     }
 
     &:hover {
@@ -19,6 +28,10 @@
 
         & > code:first-of-type {
             background-color: @color-white;
+        }
+
+        & > .justinkase-hint-classname:first-of-type {
+            display: inherit;
         }
     }
 
