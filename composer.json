@@ -1,17 +1,24 @@
 {
     "name": "justinkase/module-layouthints",
-    "description":"",
-    "keywords": [
-        "magento 2",
-        "magento2"
-    ],
-    "require": {
-    },
+    "description":"Simple module to show enhanced template hints.",
     "type": "magento2-module",
+    "version": "0.0.1",
     "license": [
-        "OSL-3.0",
         "AFL-3.0"
     ],
+    "keywords": [
+        "magento 2",
+        "magento2",
+        "template hints",
+        "layout",
+        "layout information",
+        "template",
+        "hints"
+    ],
+    "require": {
+        "php": "~7.1.3|~7.2.0",
+        "magento/framework": "~100.0.4"
+    },
     "autoload": {
         "files": [
             "registration.php"
@@ -19,5 +26,11 @@
         "psr-4": {
             "JustinKase\\LayoutHints\\": ""
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:drew7721/module-templatehints.git"
+        }
+    ]
 }
