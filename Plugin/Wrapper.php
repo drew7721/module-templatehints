@@ -2,13 +2,15 @@
 namespace JustinKase\LayoutHints\Plugin;
 
 /**
- * Class BlockWrapper
+ * Class Wrapper
  *
- * Plugin to wrap the block rendered results in a template hint `div`.
+ * Plugin for the classes :
+ *  \Magento\Framework\View\Element\Template - fetchView
+ *  \Magento\Framework\View\Layout - renderNonCachedElement
  *
  * @author Alex Ghiban <drew7721@gmail.com>
  */
-class BlockWrapper implements WrapperInterface
+class Wrapper implements WrapperInterface
 {
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
