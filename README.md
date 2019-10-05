@@ -16,9 +16,11 @@ justinkase:hints:off
 So to enable the hints simply run `magento justinkase:hints:on` and you
 should probably run a `magento cache:flush` command if your caches are enabled.
 
+![](https://i.imgur.com/C4l3SMf.png)
+
 #### Admin panel
-Check out the **Developer** section of the admin panel and you can enable it from
-there. `Advanced > Developer > JustinKase`
+Update the setting from the admin panel. `Advanced > Developer > JustinKase` 
+![](https://i.imgur.com/YGjZNPp.png)
 
 ## Author
 [Alex Ghiban](mailto:drew7721@gmail.com)
