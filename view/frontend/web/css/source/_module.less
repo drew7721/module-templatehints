@@ -13,6 +13,14 @@
         color: @color-black_dark;
         background-color: transparent;
         font-style: italic;
+
+        & > span.justinkase-hint-classname:first-of-type {
+            position: absolute;
+            right: 0;
+            display: none;
+            background-color: @color-blue2 ;
+            color: @color-white-fog;
+        }
     }
 
     & > .justinkase-hint-classname:first-of-type {
@@ -28,10 +36,11 @@
 
         & > code:first-of-type {
             background-color: @color-white;
-        }
 
-        & > .justinkase-hint-classname:first-of-type {
-            display: inherit;
+            & > .justinkase-hint-classname:first-of-type {
+                display: inherit;
+                z-index: 999;
+            }
         }
     }
 
@@ -40,6 +49,7 @@
 
         &:before {
             content: "~";
+            color: @color-orange-red2;
         }
     }
 }
