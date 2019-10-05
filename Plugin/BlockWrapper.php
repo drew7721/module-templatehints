@@ -27,6 +27,8 @@ class BlockWrapper implements WrapperInterface
     }
 
     /**
+     * Wraps only around blocks to output the template file.
+     *
      * @param \Magento\Framework\View\Element\Template $subject
      * @param string $result
      *
@@ -46,5 +48,52 @@ class BlockWrapper implements WrapperInterface
         }
 
         return $result;
+    }
+
+    /**
+     * This wraps around all rendering of elements.
+     *
+     * Indicates if it's a container, a ui element or a block and it's name.
+     *
+     * @param \Magento\Framework\View\Layout $subject
+     * @param callable $proceed
+     * @param $name
+     *
+     * @return string
+     */
+    public function aroundRenderNonCachedElement(
+        \Magento\Framework\View\Layout $subject,
+        callable $proceed,
+        $name
+    ) {
+        $result = $proceed($name);
+
+        if ($this->scopeConfig->getValue(self::JK_CONFIG_BLOCK_HINTS_STATUS)) {
+            $type = $this->getElementType($subject, $name);
+            $result = "<div class=\"justinkase-hint\"><code>($type) <strong>$name</strong></code>$result</div>";
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get the type of the element that is rendered.
+     *
+     * @param \Magento\Framework\View\Layout $subject
+     * @param $name
+     *
+     * @return string
+     */
+    private function getElementType(\Magento\Framework\View\Layout $subject, $name)
+    {
+        if ($subject->isUiComponent($name)) {
+            return "Ui";
+        }
+
+        if ($subject->isBlock($name)) {
+            return "Block";
+        }
+
+        return "Container";
     }
 }

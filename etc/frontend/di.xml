@@ -4,4 +4,7 @@
     <type name="Magento\Framework\View\Element\Template">
         <plugin name="justinkase_templatehints" type="JustinKase\LayoutHints\Plugin\BlockWrapper" sortOrder="1"/>
     </type>
+    <type name="Magento\Framework\View\Layout">
+        <plugin name="justinkase_templatehints" type="JustinKase\LayoutHints\Plugin\BlockWrapper" sortOrder="1"/>
+    </type>
 </config>
