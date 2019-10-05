@@ -4,13 +4,13 @@
  */
 .justinkase-hint {
     position: relative;
-    border: dotted 1px @color-red9;
+    border: dotted 1px #ff0101;
     padding: 1px;
     margin: 1px;
     z-index: 1;
 
     & > code:first-of-type {
-        color: @color-black_dark;
+        color: #222222;
         background-color: transparent;
         font-style: italic;
 
@@ -18,8 +18,8 @@
             position: absolute;
             right: 0;
             display: none;
-            background-color: @color-blue2 ;
-            color: @color-white-fog;
+            background-color: #006bb4 ;
+            color: #f8f8f8;
         }
     }
 
@@ -27,7 +27,7 @@
         z-index: 999;
 
         & > code:first-of-type {
-            background-color: @color-white;
+            background-color: #ffffff;
 
             & > .justinkase-hint-classname:first-of-type {
                 display: inherit;
@@ -41,7 +41,7 @@
 
         &:before {
             content: "~";
-            color: @color-orange-red2;
+            color: #ff5601;
         }
     }
 }
