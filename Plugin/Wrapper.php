@@ -45,6 +45,7 @@ class Wrapper implements WrapperInterface
                 self::JK_TEMPLATE,
                 $subject->getNameInLayout(),
                 $subject->getTemplate(),
+                get_class($subject),
                 $result
             );
         }
