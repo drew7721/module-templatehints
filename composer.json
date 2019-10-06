@@ -2,7 +2,7 @@
     "name": "justinkase/module-layouthints",
     "description":"Simple module to show enhanced template hints.",
     "type": "magento2-module",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": [
         "AFL-3.0"
     ],
