@@ -23,8 +23,10 @@ should probably run a `magento cache:flush` command if your caches are enabled.
 ![](https://i.imgur.com/C4l3SMf.png)
 
 ### Admin panel
-Update the setting from the admin panel. `Advanced > Developer > JustinKase` 
-![](https://i.imgur.com/YGjZNPp.png)
+Update the setting from the admin panel. 
+
+`Stores > Configuration > JustinKase > Layout Hints` 
+![](https://i.imgur.com/j4vgKKk.png)
 
 ## Author
 [Alex Ghiban](mailto:drew7721@gmail.com)

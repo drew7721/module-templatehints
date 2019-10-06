@@ -6,15 +6,19 @@
  */-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="justinkase" translate="label" sortOrder="900">
+        <tab id="justinkase" translate="label" sortOrder="555">
             <label>JustinKase</label>
         </tab>
-        <section id="justinkase_hints">
+
+        <section id="justinkase_hints" translate="label" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Layout Hints</label>
             <tab>justinkase</tab>
-            <group id="global_setting" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>JustinKase_LayoutHints::config</resource>
+
+            <group id="global_setting" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>JustinKase - Better Template Hints</label>
-                <field id="status" sortOrder="10" translate="label comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+
+                <field id="status" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Show Block and Template Hints</label>
                     <comment><![CDATA[Show hints on front end.]]></comment>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
