@@ -52,5 +52,7 @@ class Hints extends \Symfony\Component\Console\Command\Command
             WrapperInterface::JK_CONFIG_BLOCK_HINTS_STATUS,
             $this->setState
         );
+        $status = ($this->setState === 0) ? "Disabled" : "Enabled";
+        $output->writeln("<info>{$status} JK template hints.</info>");
     }
 }
