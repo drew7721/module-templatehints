@@ -3,8 +3,10 @@ Simple Magento 2 module to show better layout hints.
 
 ## Why?
 The default layout hints in M2 are horrible! They don't give enough information
-about the block, its name and there is no information about the container or the
-ui elements that are rendered. This fixes all of that.
+about the block. There is no information about the containers or the
+ui elements that are rendered.
+
+This is built to show more information about what is on the page and how it's rendered.
 
 ## Screenshot
 ![](https://i.imgur.com/EUpbP50.png)
