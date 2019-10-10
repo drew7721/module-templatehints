@@ -1,7 +1,7 @@
 <?php
 namespace JustinKase\LayoutHints\Console\Command;
 
-use JustinKase\LayoutHints\Plugin\WrapperInterface;
+use JustinKase\LayoutHints\Api\WrapperInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

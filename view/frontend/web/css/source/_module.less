@@ -3,45 +3,65 @@
  * @author Alex Ghiban <drew7721@gmail.com>
  */
 .justinkase-hint {
-    position: relative;
-    border: dotted 1px #ff0101;
-    padding: 1px;
-    margin: 1px;
-    z-index: 1;
-
-    & > code:first-of-type {
-        color: #222222;
-        background-color: transparent;
-        font-style: italic;
-
-        & > span.justinkase-hint-classname:first-of-type {
-            position: absolute;
-            right: 0;
-            display: none;
-            background-color: #006bb4 ;
-            color: #f8f8f8;
-        }
+    .justinkase-hint-info {
+        display: none;
     }
+    .justinkase-hint-extra {
+        display: none;
+    }
+}
 
-    &:hover {
-        z-index: 999;
+body.justinkase-hints-enabled {
+    .justinkase-hint {
+        display: block;
+        position: relative;
+        border: dotted 1px #ff5501;
+        padding: 1px;
+        margin: 1px;
+        overflow: visible;
 
-        & > code:first-of-type {
-            background-color: #ffffff;
+        .justinkase-hint-info {
+            display: inline-block;
+            color: #222222;
+            background-color: #ffecd2;
+        }
 
-            & > .justinkase-hint-classname:first-of-type {
-                display: inherit;
-                z-index: 999;
+        .justinkase-hint-extra {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 999;
+            background-color: #fffaf5;
+            color: #222222;
+            padding: 0.5rem;
+            border: solid 1px #222222;
+
+            & > ul {
+                list-style: square;
+                padding-left: 2rem;
+                margin-bottom: 0;
+
+                li {
+                    margin: 0 0 0.3rem 0;
+
+                    &:last-of-type {
+                        margin-bottom: 0;
+                    }
+                }
             }
         }
-    }
 
-    & > .justinkase-hint {
-        margin: 0 1rem;
+        &:hover {
+            border-style: solid;
+            border-color: #ff0101;
+            & > .justinkase-hint-extra {
+                display: block;
+            }
+        }
 
-        &:before {
-            content: "~";
-            color: #ff5601;
+        & > .justinkase-hint {
+            margin: 0 0.5rem;
         }
     }
 }
+
