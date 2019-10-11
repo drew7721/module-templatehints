@@ -26,6 +26,12 @@ non-intrusive manner.
 
 ## How to use it?
 
+### Install
+
+```
+composer require justinkase/module-layouthints
+``` 
+
 ### Frontend
 
 After enabling the hints from the backend you can use the `Shift + Ctrl + H` key combination on the frontend to toggle the display of the layout hints.
