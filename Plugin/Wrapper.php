@@ -4,7 +4,8 @@ namespace JustinKase\LayoutHints\Plugin;
 use JustinKase\LayoutHints\Api\WrapperInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\State as AppState;
-use Magento\Framework\View\Layout\Element;
+use Magento\Framework\View\Layout;
+use Magento\Framework\View\Page\Config;
 
 /**
  * Class Wrapper
@@ -17,7 +18,7 @@ use Magento\Framework\View\Layout\Element;
  */
 class Wrapper implements WrapperInterface
 {
-    const JK_TEMPLATE = '<div class="justinkase-hint"><span class="justinkase-hint-info">[%s]%s</span><div class="justinkase-hint-extra">%s</div>%s</div>';
+    const JK_TEMPLATE = '<div class="justinkase-hint"><span class="justinkase-hint-info">[%s] %s</span><br/><div class="justinkase-hint-extra">%s</div>%s</div>';
 
     /**
      * @var ScopeConfigInterface $scopeConfig
@@ -35,7 +36,7 @@ class Wrapper implements WrapperInterface
     private $bodyClassSet = false;
 
     /**
-     * @var \Magento\Framework\View\Page\Config
+     * @var Config
      */
     private $pageConfig;
 
@@ -43,12 +44,12 @@ class Wrapper implements WrapperInterface
      * BlockWrapper constructor.
      *
      * @param ScopeConfigInterface $scopeConfig
-     * @param \Magento\Framework\View\Page\Config $pageConfig
+     * @param Config $pageConfig
      * @param AppState $appState
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        \Magento\Framework\View\Page\Config $pageConfig,
+        Config $pageConfig,
         AppState $appState
     ) {
         $this->scopeConfig = $scopeConfig;
@@ -61,14 +62,14 @@ class Wrapper implements WrapperInterface
      *
      * Indicates if it's a container, a ui element or a block and it's name.
      *
-     * @param \Magento\Framework\View\Layout $layout
+     * @param Layout $layout
      * @param callable $proceed
      * @param $name
      *
      * @return string
      */
     public function aroundRenderNonCachedElement(
-        \Magento\Framework\View\Layout $layout,
+        Layout $layout,
         callable $proceed,
         $name
     ) {
@@ -87,28 +88,31 @@ class Wrapper implements WrapperInterface
         return $result;
     }
 
-    public function wrapResult(\Magento\Framework\View\Layout $layout, $name, string $result)
+    public function wrapResult(Layout $layout, $name, string $result)
     {
         $type = $layout->getElementProperty($name, 'type');
         $extraData = [
             'type' => $type,
-            'alias' => $layout->getElementAlias($name),
             'name' => $name,
+            'alias' => $layout->getElementAlias($name),
             'parent' => $layout->getParentName($name),
         ];
         $block = $layout->getBlock($name);
         if ($block) {
             $blockData = [
-                'module_name' => $block->getModuleName(),
-                'cache_key' => $block->getCacheKey(),
                 'template' => $block->getTemplate(),
-                'block_class' => get_class($block)
+                'module_name' => $block->getModuleName(),
+                'class' => get_class($block),
             ];
+            $group = $layout->getElementProperty($name, 'group');
+            if ($group) {
+                $blockData['group'] = $group;
+            }
             $extraData = array_merge($extraData, $blockData);
         }
         $extraDataHtml = '<ul>';
         foreach ($extraData as $key => $value) {
-            $extraDataHtml .= "<li><strong>$key</strong>: $value</li>";
+            $extraDataHtml .= "<li>$key => $value</li>";
         }
         $extraDataHtml .= '</ul>';
 

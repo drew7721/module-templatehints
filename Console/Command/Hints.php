@@ -2,6 +2,8 @@
 namespace JustinKase\LayoutHints\Console\Command;
 
 use JustinKase\LayoutHints\Api\WrapperInterface;
+use Magento\Framework\App\Config\ConfigResource\ConfigInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -14,10 +16,10 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @author Alex Ghiban <drew7721@gmail.com>
  */
-class Hints extends \Symfony\Component\Console\Command\Command
+class Hints extends Command
 {
     /**
-     * @var \Magento\Framework\App\Config\ConfigResource\ConfigInterface
+     * @var ConfigInterface
      */
     private $config;
 
@@ -29,13 +31,13 @@ class Hints extends \Symfony\Component\Console\Command\Command
     /**
      * EnableHints constructor.
      *
-     * @param \Magento\Framework\App\Config\ConfigResource\ConfigInterface $config
+     * @param ConfigInterface $config
      * @param string|null $name
      * @param string|null $description
      * @param int $setState
      */
     public function __construct(
-        \Magento\Framework\App\Config\ConfigResource\ConfigInterface $config,
+        ConfigInterface $config,
         string $name = 'justinkase:hints:off',
         string $description = 'Disable Hints',
         int $setState = 0
