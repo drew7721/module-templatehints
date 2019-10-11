@@ -1,5 +1,10 @@
 # Better Layout Hints
+
 Magento 2 module to show better layout hints.
+
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/drew7721/module-templatehints)
+![GitHub All Releases](https://img.shields.io/github/downloads/drew7721/module-templatehints/total)
+![GitHub forks](https://img.shields.io/github/forks/drew7721/module-templatehints?style=social)
 
 ## Why?
 The default layout hints in Magento 2 lack much of the needed information.
