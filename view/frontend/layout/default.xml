@@ -3,4 +3,9 @@
     <head>
         <script src="JustinKase_LayoutHints::js/jk-hints.js"/>
     </head>
+    <body>
+        <referenceContainer name="root">
+            <block name="justinkase_layout_info" class="Magento\Framework\View\Element\Template" as="jkase_info" template="JustinKase_LayoutHints::info.phtml"/>
+        </referenceContainer>
+    </body>
 </page>
