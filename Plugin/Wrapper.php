@@ -18,7 +18,7 @@ use Magento\Framework\View\Page\Config;
  */
 class Wrapper implements WrapperInterface
 {
-    const JK_TEMPLATE = '<div class="justinkase-hint"><span class="justinkase-hint-info">[%s] %s</span><br/><div class="justinkase-hint-extra">%s</div>%s</div>';
+    const JK_TEMPLATE = '<div class="justinkase-hint"><span class="justinkase-hint-info">[%s] %s</span><div class="justinkase-hint-extra">%s</div>%s</div>';
 
     /**
      * @var ScopeConfigInterface $scopeConfig
