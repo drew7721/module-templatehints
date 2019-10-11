@@ -2,7 +2,7 @@
     "name": "justinkase/module-layouthints",
     "description":"This is Magento 2 template hints on steroids!",
     "type": "magento2-module",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "license": [
         "AFL-3.0"
     ],
