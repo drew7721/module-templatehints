@@ -5,7 +5,7 @@
     </head>
     <body>
         <referenceContainer name="root">
-            <block name="justinkase_layout_info" class="Magento\Framework\View\Element\Template" as="jkase_info" template="JustinKase_LayoutHints::info.phtml"/>
+            <block name="justinkase_layout_info" as="jkase_info" class="JustinKase\LayoutHints\Block\Info" template="JustinKase_LayoutHints::info.phtml" after="-"/>
         </referenceContainer>
     </body>
 </page>

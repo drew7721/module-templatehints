@@ -4,12 +4,14 @@
  *
  * @author Alex Ghiban <drew7721@gmail.com>
  *
- * @var \Magento\Framework\View\Element\Template $block
+ * @var \JustinKase\LayoutHints\Block\Info $block
  */
 ?>
-<div class="justinkase-hint-footer">
-    <h4>Used Layout Update Handles</h4>
-    <?php  var_dump($block->getLayout()->getUpdate()->getHandles());?>
-    <h4>Suggested Available Containers</h4>
-    <?php  var_dump($block->getLayout()->getUpdate()->getContainers());?>
-</div>
+<?php if($block->isJustinKaseHintsEnabled()): ?>
+    <div class="justinkase-hint-footer">
+        <h4>Used Layout Update Handles</h4>
+        <?php  var_dump($block->getLayout()->getUpdate()->getHandles());?>
+        <h4>Suggested Available Containers</h4>
+        <?php  var_dump($block->getLayout()->getUpdate()->getContainers());?>
+    </div>
+<?php endif; ?>
