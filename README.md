@@ -23,9 +23,9 @@ non-intrusive manner.
 
 ### Frontend
 
-You can use the `Shift + Ctrl + H` key combination on the frontend to toggle the display of the layout hints.
+After enabling the hints from the backend you can use the `Shift + Ctrl + H` key combination on the frontend to toggle the display of the layout hints.
 
-### Enable/Disable
+### Backend Enable/Disable
 You can enable the hints from the console or the admin panel.
 
 **Console:**
