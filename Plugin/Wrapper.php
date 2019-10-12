@@ -68,17 +68,16 @@ class Wrapper implements WrapperInterface
         callable $proceed,
         $name
     ) {
-        /** @var string $result */
-        $result = $proceed($name);
-
         if ($this->scopeConfig->getValue(self::JK_CONFIG_BLOCK_HINTS_STATUS) && $this->isDeveloperMode()) {
-            $result = $this->wrapResult($layout, $name, $result);
+            $result = $this->wrapResult($layout, $name, $proceed);
+        } else {
+            $result = $proceed($name);
         }
 
         return $result;
     }
 
-    public function wrapResult(Layout $layout, $name, string $result)
+    public function wrapResult(Layout $layout, $name, callable $proceed)
     {
         $type = $layout->getElementProperty($name, 'type');
         $extraData = [
@@ -94,10 +93,12 @@ class Wrapper implements WrapperInterface
                 'module_name' => $block->getModuleName(),
                 'class' => get_class($block),
             ];
+
             $group = $layout->getElementProperty($name, 'group');
             if ($group) {
                 $blockData['group'] = $group;
             }
+
             $extraData = array_merge($extraData, $blockData);
         }
         $extraDataHtml = '<ul>';
@@ -112,7 +113,7 @@ class Wrapper implements WrapperInterface
             $type,
             $name,
             $extraDataHtml,
-            $result
+            $proceed($name)
         );
     }
 
