@@ -7,11 +7,11 @@
  * @var \JustinKase\LayoutHints\Block\Info $block
  */
 ?>
-<?php if($block->isJustinKaseHintsEnabled()): ?>
+<?php if($block->isDeveloperMode()): ?>
     <div class="justinkase-hint-footer">
         <h4>Used Layout Update Handles</h4>
-        <?php  var_dump($block->getLayout()->getUpdate()->getHandles());?>
+        <pre><?php  var_export($block->getLayout()->getUpdate()->getHandles());?></pre>
         <h4>Suggested Available Containers</h4>
-        <?php  var_dump($block->getLayout()->getUpdate()->getContainers());?>
+        <pre><?php  var_export($block->getLayout()->getUpdate()->getContainers());?></pre>
     </div>
 <?php endif; ?>
