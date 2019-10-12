@@ -14,4 +14,13 @@
         <h4>Suggested Available Containers</h4>
         <pre><?php  var_export($block->getLayout()->getUpdate()->getContainers());?></pre>
     </div>
+<script>
+    (function(){
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'H' && e.shiftKey && e.ctrlKey) {
+                document.getElementsByTagName('body')[0].classList.toggle('justinkase-hints-enabled');
+            }
+        })
+    }());
+</script>
 <?php endif; ?>

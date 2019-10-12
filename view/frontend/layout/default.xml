@@ -1,8 +1,5 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <head>
-        <script src="JustinKase_LayoutHints::js/jk-hints.js"/>
-    </head>
     <body>
         <referenceContainer name="root">
             <block name="justinkase_layout_info" as="jkase_info" class="JustinKase\LayoutHints\Block\Info" template="JustinKase_LayoutHints::info.phtml" ifconfig="justinkase_hints/global_setting/status" after="-"/>
