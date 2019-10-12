@@ -8,8 +8,6 @@ Magento 2 module to show better layout hints.
 
 ## Why?
 The default layout hints in Magento 2 lack much of the needed information.
- 
-Because knowledge is key and information is primordial.
 
 The goal is to provide all the additional information about the layout of the current page. 
 
@@ -31,6 +29,7 @@ non-intrusive manner.
 ```
 composer require justinkase/module-layouthints
 ``` 
+**Note**: The hints will only be visible in **developer mode**.
 
 ### Frontend
 
