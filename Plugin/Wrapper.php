@@ -10,9 +10,7 @@ use Magento\Framework\View\Page\Config;
 /**
  * Class Wrapper
  *
- * Plugin for the classes :
- *  \Magento\Framework\View\Element\Template - fetchView
- *  \Magento\Framework\View\Layout - renderNonCachedElement
+ * Plugin to wrap the rendered block content.
  *
  * @author Alex Ghiban <drew7721@gmail.com>
  */
