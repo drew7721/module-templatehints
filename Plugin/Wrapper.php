@@ -31,11 +31,6 @@ class Wrapper implements WrapperInterface
     private $appState;
 
     /**
-     * @var bool $bodyClassSet
-     */
-    private $bodyClassSet = false;
-
-    /**
      * @var Config
      */
     private $pageConfig;
@@ -77,11 +72,6 @@ class Wrapper implements WrapperInterface
         $result = $proceed($name);
 
         if ($this->scopeConfig->getValue(self::JK_CONFIG_BLOCK_HINTS_STATUS) && $this->isDeveloperMode()) {
-            if (!$this->bodyClassSet) {
-                $this->pageConfig->addBodyClass('justinkase-hints-enabled');
-                $this->bodyClassSet = true;
-            }
-
             $result = $this->wrapResult($layout, $name, $result);
         }
 

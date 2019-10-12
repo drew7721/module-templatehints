@@ -12,6 +12,14 @@ use Magento\Framework\View\Element\Template;
  */
 class Info extends Template
 {
+    protected function _construct()
+    {
+        parent::_construct();
+        if ($this->isDeveloperMode()) {
+            $this->pageConfig->addBodyClass('justinkase-hints-enabled');
+        }
+    }
+
     /**
      * Should the jk-hints info show?
      *
@@ -19,9 +27,8 @@ class Info extends Template
      *
      * @return bool
      */
-    public function isJustinKaseHintsEnabled()
+    public function isDeveloperMode()
     {
-        return ($this->_appState->getMode() === $this->_appState::MODE_DEVELOPER)
-            && $this->_scopeConfig->getValue(WrapperInterface::JK_CONFIG_BLOCK_HINTS_STATUS);
+        return ($this->_appState->getMode() === $this->_appState::MODE_DEVELOPER);
     }
 }
