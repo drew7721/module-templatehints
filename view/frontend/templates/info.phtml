@@ -8,17 +8,73 @@
  */
 ?>
 <?php if($block->isDeveloperMode()): ?>
-    <div class="justinkase-hint-footer">
-        <h4>Used Layout Update Handles</h4>
-        <pre><?php  var_export($block->getLayout()->getUpdate()->getHandles());?></pre>
-        <h4>Suggested Available Containers</h4>
-        <pre><?php  var_export($block->getLayout()->getUpdate()->getContainers());?></pre>
-    </div>
+    <?php if($block->hintsAreEnabled()): ?>
+            <div class="justinkase-hint-footer">
+                <h4>Used Layout Update Handles</h4>
+                <pre><?php  var_export($block->getLayout()->getUpdate()->getHandles());?></pre>
+                <h4>Suggested Available Containers</h4>
+                <pre><?php  var_export($block->getLayout()->getUpdate()->getContainers());?></pre>
+            </div>
+    <?php endif; ?>
 <script>
     (function(){
+        function notify(message) {
+            if ("Notification" in window) {
+                var title = "JKase";
+                var options = {
+                    icon: "https://i.imgur.com/Jd1JWSL.png",
+                    body: message
+                };
+                if(Notification.permission !== "granted") {
+                    Notification.requestPermission().then(function (permission) {
+                        if (permission === "granted") {
+                            new Notification(title, options);
+                        }
+                    });
+                } else {
+                    new Notification(title, options);
+                }
+            }
+        }
+
+        function sendRequest(action) {
+            if (window.XMLHttpRequest) {
+                var httpRequest = new XMLHttpRequest();
+                var endpoint = window.location.origin + "/jkase?action=" + action;
+                httpRequest.onreadystatechange = function(){
+                    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                        if (httpRequest.status === 200) {
+                            notify(JSON.parse(httpRequest.responseText).result);
+                        } else {
+                            notify('There was a problem with the request.');
+                        }
+                    }
+                };
+                httpRequest.open('GET', endpoint);
+                httpRequest.send();
+            }
+        }
+
         document.addEventListener('keydown', function (e) {
-            if (e.key === 'H' && e.shiftKey && e.ctrlKey) {
-                document.getElementsByTagName('body')[0].classList.toggle('justinkase-hints-enabled');
+            if (e.shiftKey && e.ctrlKey) {
+                if (e.key === 'H') {
+                    document.getElementsByTagName('body')[0].classList.toggle('justinkase-hints-enabled');
+                    notify("Toggled display of hints.");
+                }
+                if (e.key === 'C') {
+                    notify("Clearing caches...");
+                    sendRequest('clearCaches')
+                }
+
+                if (e.key === '_') {
+                    notify("Turning Hints Off from backend...");
+                    sendRequest('hintsOff')
+                }
+
+                if (e.key === '+') {
+                    notify("Turning Hints ON from backend...");
+                    sendRequest('hintsOn')
+                }
             }
         })
     }());
