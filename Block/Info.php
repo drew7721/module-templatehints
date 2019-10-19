@@ -21,14 +21,23 @@ class Info extends Template
     }
 
     /**
-     * Should the jk-hints info show?
      *
-     * Checks the app state and the status of the module.
+     * Check if app is deployed in developer mode.
      *
      * @return bool
      */
     public function isDeveloperMode()
     {
         return ($this->_appState->getMode() === $this->_appState::MODE_DEVELOPER);
+    }
+
+    /**
+     * Are hints enabled?
+     *
+     * @return mixed
+     */
+    public function hintsAreEnabled()
+    {
+        return $this->_scopeConfig->getValue(WrapperInterface::JK_CONFIG_BLOCK_HINTS_STATUS);
     }
 }
