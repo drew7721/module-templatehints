@@ -1,5 +1,13 @@
 <?php
 /**
+ * Copyright © 2020
+ * @copyright Alex Ghiban & JustinKase.ca - All rights reserved.
+ * @license GPL-3.0-only
+ * @see https://justinkase.ca or https://ghiban.com
+ * @contact <alex@justinkase.ca>
+ */
+
+/**
  * Additional information template.
  *
  * @author Alex Ghiban <drew7721@gmail.com>
@@ -7,8 +15,8 @@
  * @var \JustinKase\LayoutHints\Block\Info $block
  */
 ?>
-<?php if($block->isDeveloperMode()): ?>
-    <?php if($block->hintsAreEnabled()): ?>
+<?php if ($block->isDeveloperMode()): ?>
+    <?php if ($block->hintsAreEnabled()): ?>
             <div class="justinkase-hint-footer">
                 <h4>Used Layout Update Handles</h4>
                 <pre><?php  var_export($block->getLayout()->getUpdate()->getHandles());?></pre>
@@ -19,9 +27,11 @@
 <script>
     (function(){
         function notify(message) {
+            var options;
+            var title;
             if ("Notification" in window) {
-                var title = "JKase";
-                var options = {
+                title = "JKase";
+                options = {
                     icon: "https://i.imgur.com/Jd1JWSL.png",
                     body: message
                 };
@@ -38,9 +48,11 @@
         }
 
         function sendRequest(action) {
+            var endpoint;
+            var httpRequest;
             if (window.XMLHttpRequest) {
-                var httpRequest = new XMLHttpRequest();
-                var endpoint = window.location.origin + "/jkase?action=" + action;
+                httpRequest = new XMLHttpRequest();
+                endpoint = window.location.origin + "/jkase?action=" + action;
                 httpRequest.onreadystatechange = function(){
                     if (httpRequest.readyState === XMLHttpRequest.DONE) {
                         if (httpRequest.status === 200) {
@@ -59,7 +71,6 @@
             if (e.shiftKey && e.ctrlKey) {
                 if (e.key === 'H') {
                     document.getElementsByTagName('body')[0].classList.toggle('justinkase-hints-enabled');
-                    notify("Toggled display of hints.");
                 }
                 if (e.key === 'C') {
                     notify("Clearing caches...");
