@@ -1,4 +1,12 @@
 <?php
+/**
+ * Copyright © 2020
+ * @copyright Alex Ghiban & JustinKase.ca - All rights reserved.
+ * @license GPL-3.0-only
+ * @see https://justinkase.ca or https://ghiban.com
+ * @contact <alex@justinkase.ca>
+ */
+
 namespace JustinKase\LayoutHints\Controller\Index;
 
 use JustinKase\LayoutHints\Api\WrapperInterface;
@@ -47,8 +55,7 @@ class Index extends \Magento\Framework\App\Action\Action
         EventManagerInterface $eventManager,
         Manager $cacheManager,
         ConfigInterface $config
-    )
-    {
+    ) {
         parent::__construct($context);
         $this->eventManager = $eventManager;
         $this->cacheManager = $cacheManager;
@@ -61,7 +68,6 @@ class Index extends \Magento\Framework\App\Action\Action
      * Note: Request will be added as operation argument in future
      *
      * @return \Magento\Framework\Controller\ResultInterface|ResponseInterface
-     * @throws \Magento\Framework\Exception\NotFoundException
      */
     public function execute()
     {

@@ -1,4 +1,12 @@
 <?xml version="1.0"?>
+<!--
+  ~ Copyright © 2020
+  ~ @copyright Alex Ghiban & JustinKase.ca - All rights reserved.
+  ~ @license GPL-3.0-only
+  ~ @see https://justinkase.ca or https://ghiban.com
+  ~ @contact <alex@justinkase.ca>
+  -->
+
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
     <module name="JustinKase_LayoutHints" setup_version="1.1.1"/>
 </config>
