@@ -16,5 +16,5 @@ namespace JustinKase\LayoutHints\Api;
  */
 interface WrapperInterface
 {
-    const JK_CONFIG_BLOCK_HINTS_STATUS = 'justinkase_hints/global_setting/status';
+    const JK_CONFIG_BLOCK_HINTS_STATUS = 'dev/justinkase_hints/status';
 }
