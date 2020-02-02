@@ -28,7 +28,7 @@ twitter_username: drew7721
 github_username:  drew7721
 
 # Build settings
-theme: jekyll-theme-minimal
+theme: minima
 plugins:
   - jekyll-feed
 
