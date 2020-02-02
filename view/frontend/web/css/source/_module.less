@@ -21,6 +21,8 @@
 
 
 .justinkase-hint {
+    display: contents;
+
     .justinkase-hint-info {
         display: none;
     }
@@ -50,7 +52,6 @@ body.justinkase-hints-enabled {
         .justinkase-hint-info {
             display: inline-block;
             color: @jk_color_dark_black;
-            background-color: @jk_color_white;
             font-size: x-small;
 
             &.type-container {
@@ -101,4 +102,19 @@ body.justinkase-hints-enabled {
         }
     }
 }
+//
+//  Fix for Magento Menu issue Desktop
+//  _____________________________________________
 
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+    .nav-sections-item-content > * {
+        display: initial;
+    }
+
+    .nav-sections-item-content {
+        .navigation {
+            display: block;
+        }
+    }
+}
