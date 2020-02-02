@@ -1,7 +1,25 @@
+/*
+ * Copyright © 2020
+ * @copyright Alex Ghiban & JustinKase.ca - All rights reserved.
+ * @license GPL-3.0-only
+ * @see https://justinkase.ca or https://ghiban.com
+ * @contact <alex@justinkase.ca>
+ */
+
 /**
  * Style for the template hint.
  * @author Alex Ghiban <drew7721@gmail.com>
  */
+@jk_color_dark_black: #222222;
+@jk_color_white: #FFFFFF;
+@jk_color_dirty_white: #F9F9F9;
+@jk_color_vivid_red: #FF0101;
+@jk_color_vivid_orange: #FF5501;
+@jk_color_container_glow: #ABCDEF;
+@jk_color_block_glow: #E4B9B9;
+@jk_color_uiComponent_glow: #AEE41D;
+
+
 .justinkase-hint {
     .justinkase-hint-info {
         display: none;
@@ -24,16 +42,28 @@ body.justinkase-hints-enabled {
     .justinkase-hint {
         display: block;
         position: relative;
-        border: dotted 1px #FF5501;
+        border: dotted 1px @jk_color_vivid_orange;
         padding: 1px;
         margin: 1px;
         overflow: visible;
 
         .justinkase-hint-info {
             display: inline-block;
-            color: #222222;
-            background-color: #FFFFFF;
+            color: @jk_color_dark_black;
+            background-color: @jk_color_white;
             font-size: x-small;
+
+            &.type-container {
+                background-color: @jk_color_container_glow;
+            }
+
+            &.type-block {
+                background-color: @jk_color_block_glow;
+            }
+
+            &.type-uiComponent {
+                background-color: @jk_color_uiComponent_glow;
+            }
         }
 
         .justinkase-hint-extra {
@@ -41,10 +71,10 @@ body.justinkase-hints-enabled {
             top: 0;
             right: 0;
             z-index: 999;
-            background-color: #F9F9F9;
-            color: #222222;
+            background-color: @jk_color_dirty_white;
+            color: @jk_color_dark_black;
             padding: 0.5rem;
-            border: solid 1px #222222;
+            border: solid 1px @jk_color_dark_black;
             font-size: x-small;
 
             & > ul {
@@ -64,7 +94,7 @@ body.justinkase-hints-enabled {
 
         &:hover {
             border-style: solid;
-            border-color: #FF0101;
+            border-color: @jk_color_vivid_red;
             & > .justinkase-hint-extra {
                 display: block;
             }

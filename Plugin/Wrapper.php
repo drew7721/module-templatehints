@@ -1,4 +1,12 @@
 <?php
+/**
+ * Copyright © 2020
+ * @copyright Alex Ghiban & JustinKase.ca - All rights reserved.
+ * @license GPL-3.0-only
+ * @see https://justinkase.ca or https://ghiban.com
+ * @contact <alex@justinkase.ca>
+ */
+
 namespace JustinKase\LayoutHints\Plugin;
 
 use JustinKase\LayoutHints\Api\WrapperInterface;
@@ -16,7 +24,7 @@ use Magento\Framework\View\Page\Config;
  */
 class Wrapper implements WrapperInterface
 {
-    const JK_TEMPLATE = '<div class="justinkase-hint"><span class="justinkase-hint-info">[%s] %s</span><div class="justinkase-hint-extra">%s</div>%s</div>';
+    const JK_TEMPLATE = '<div class="justinkase-hint"><span class="justinkase-hint-info type-%s">[%s] %s</span><div class="justinkase-hint-extra">%s</div>%s</div>';
 
     /**
      * @var ScopeConfigInterface $scopeConfig
@@ -108,6 +116,7 @@ class Wrapper implements WrapperInterface
 
         return sprintf(
             self::JK_TEMPLATE,
+            $type,
             $type,
             $name,
             $extraDataHtml,
