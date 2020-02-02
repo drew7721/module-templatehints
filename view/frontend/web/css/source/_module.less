@@ -99,19 +99,3 @@ body.justinkase-hints-enabled {
         }
     }
 }
-//
-//  Fix for Magento Menu issue Desktop
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-
-    .nav-sections-item-content > * {
-        display: initial;
-    }
-
-    .nav-sections-item-content {
-        .navigation {
-            display: block;
-        }
-    }
-}
