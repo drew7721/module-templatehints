@@ -1,7 +1,8 @@
 # Magento 2 - Layout Hints (Enhanced)
 
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/drew7721/module-templatehints)
-![GitHub forks](https://img.shields.io/github/forks/drew7721/module-templatehints?style=social)
+[![](https://img.shields.io/github/v/release/drew7721/module-templatehints)](#)
+[![](https://img.shields.io/github/issues/drew7721/module-templatehints)](#)
+[![Gitter](https://badges.gitter.im/module-templatehints/community.svg)](https://gitter.im/module-templatehints/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Why?
 Let's be honest, the default Magento 2 layout hints are very _bare_ (to stay polite). They lack much of the information
