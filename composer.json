@@ -16,7 +16,6 @@
         "hints"
     ],
     "require": {
-        "magento/module-developer": "100.3.*"
     },
     "autoload": {
         "files": [
