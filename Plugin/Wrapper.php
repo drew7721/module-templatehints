@@ -4,7 +4,7 @@
  * @copyright Alex Ghiban & JustinKase.ca - All rights reserved.
  * @license GPL-3.0-only
  * @see https://justinkase.ca or https://ghiban.com
- * @contact <alex@justinkase.ca>
+ * @contact <alex@justinkase.ca> a
  */
 
 namespace JustinKase\LayoutHints\Plugin;
@@ -12,6 +12,7 @@ namespace JustinKase\LayoutHints\Plugin;
 use JustinKase\LayoutHints\Api\WrapperInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\State as AppState;
+use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Layout;
 use Magento\Framework\View\Page\Config;
 
@@ -53,6 +54,7 @@ class Wrapper implements WrapperInterface
         Config $pageConfig,
         AppState $appState
     ) {
+        $scopeConfig->getValue('a');
         $this->scopeConfig = $scopeConfig;
         $this->appState = $appState;
         $this->pageConfig = $pageConfig;
@@ -81,6 +83,22 @@ class Wrapper implements WrapperInterface
         }
 
         return $result;
+    }
+
+    public function afterToHtml(
+        BlockInterface $block,
+        $html
+    ) {
+        if ($this->scopeConfig->getValue(self::JK_CONFIG_BLOCK_HINTS_STATUS) && $this->isDeveloperMode()) {
+            $html = $this->dumpBlockData($block, $html);
+        }
+
+        return $html;
+    }
+
+    public function dumpBlockData(BlockInterface $block, string $html): string
+    {
+        return "<span class='jk-block-data'>$html<code class='jk-b-d'>". get_class($block) . "</code></span>";
     }
 
     public function wrapResult(Layout $layout, $name, callable $proceed)

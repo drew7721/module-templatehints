@@ -38,6 +38,25 @@ body.justinkase-hints-enabled {
         display: block;
     }
 
+    .jk-block-data {
+        position: relative;
+    }
+    .code.jk-b-d {
+        background-color: @jk_color_dirty_white;
+        color: @jk_color_vivid_orange;
+        z-index: 1000;
+    }
+
+    .jk-block-data > code.jk-b-d {
+        visibility: hidden;
+        position: absolute;
+    }
+
+    .jk-block-data:hover > code.jk-b-d {
+        display: inline-block;
+        visibility: visible;
+    }
+
     .justinkase-hint {
         display: block;
         position: relative;

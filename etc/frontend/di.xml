@@ -11,4 +11,7 @@
     <type name="Magento\Framework\View\Layout">
         <plugin name="justinkase_templatehints" type="JustinKase\LayoutHints\Plugin\Wrapper" sortOrder="1"/>
     </type>
+    <type name="Magento\Framework\View\Element\BlockInterface">
+        <plugin name="justinkase_block_wrap" type="JustinKase\LayoutHints\Plugin\Wrapper"/>
+    </type>
 </config>
