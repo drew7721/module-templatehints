@@ -65,6 +65,6 @@ class Hints extends Command
         $status = ($this->setState === 0) ? "Disabled" : "Enabled";
         $output->writeln("<info>{$status} JK template hints.</info>");
 
-        return $this::SUCCESS;
+        return 0;
     }
 }
