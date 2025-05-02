@@ -12,17 +12,20 @@ namespace JustinKase\LayoutHints\Plugin;
 use JustinKase\LayoutHints\Api\WrapperInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\State as AppState;
-use Magento\Framework\View\Layout;
+use Magento\Framework\Filter\DirectiveProcessorInterface;
+use Magento\Framework\Filter\Template;
 use Magento\Framework\View\Page\Config;
 
 /**
- * Class Wrapper
+ * Widget Wrapper
  *
- * Plugin to wrap the rendered block content.
+ * Plugin to wrap the rendered widget content.
+ *
+ * TODO: create an abstract class for the common functionality between this and the BlockWrapper
  *
  * @author Alex Ghiban <drew7721@gmail.com>
  */
-class Wrapper implements WrapperInterface
+class WidgetWrapper implements WrapperInterface
 {
 
     /**
@@ -57,55 +60,37 @@ class Wrapper implements WrapperInterface
         $this->pageConfig = $pageConfig;
     }
 
-    /**
-     * This wraps around all rendering of elements.
-     *
-     * Indicates if it's a container, a ui element or a block and it's name.
-     *
-     * @param Layout $layout
-     * @param callable $proceed
-     * @param $name
-     *
-     * @return string
-     */
-    public function aroundRenderNonCachedElement(
-        Layout $layout,
-        callable $proceed,
-        $name
-    ) {
+    public function afterProcess(DirectiveProcessorInterface $directiveProcessor, $result, array $construction, Template $filter, array $templateVariables)
+    {
         if ($this->scopeConfig->getValue(self::JK_CONFIG_BLOCK_HINTS_STATUS) && $this->isDeveloperMode()) {
-            $result = $this->wrapResult($layout, $name, $proceed);
-        } else {
-            $result = $proceed($name);
+            $result = $this->wrapResult($directiveProcessor, $result, $construction, $filter, $templateVariables);
         }
 
         return $result;
     }
 
-    public function wrapResult(Layout $layout, $name, callable $proceed)
+
+    public function wrapResult(DirectiveProcessorInterface $directiveProcessor, $result, array $construction, Template $filter, array $templateVariables)
     {
-        $type = $layout->getElementProperty($name, 'type');
+
+
+        $type = $construction[1];
+        $widgetContent = $construction[0];
+        $typeMatches = [];
+        preg_match('/(?<=\btype=")[^"]+/', $construction[0], $typeMatches);
+        $widgetClass = $typeMatches[0] ?? null;
+
+
+        $pattern = '/(?<=\s)([a-zA-Z0-9_]+)(?==)/';
+        $replacement = '<b>$1</b>';
+        $widgetContent = preg_replace($pattern, $replacement, $widgetContent);
+
         $extraData = [
             'type' => $type,
-            'name' => $name,
-            'alias' => $layout->getElementAlias($name),
-            'parent' => $layout->getParentName($name),
+            'name' => $widgetClass,
+            'code' => $widgetContent
         ];
-        $block = $layout->getBlock($name);
-        if ($block) {
-            $blockData = [
-                'template' => $block->getTemplate(),
-                'module_name' => $block->getModuleName(),
-                'class' => get_class($block),
-            ];
 
-            $group = $layout->getElementProperty($name, 'group');
-            if ($group) {
-                $blockData['group'] = $group;
-            }
-
-            $extraData = array_merge($extraData, $blockData);
-        }
         $extraDataHtml = '<ul>';
         foreach ($extraData as $key => $value) {
             $extraDataHtml .= "<li>$key => $value</li>";
@@ -117,9 +102,9 @@ class Wrapper implements WrapperInterface
             self::JK_TEMPLATE,
             $type,
             $type,
-            $name,
+            $widgetClass,
             $extraDataHtml,
-            $proceed($name)
+            $result
         );
     }
 

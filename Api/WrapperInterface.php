@@ -17,4 +17,6 @@ namespace JustinKase\LayoutHints\Api;
 interface WrapperInterface
 {
     const JK_CONFIG_BLOCK_HINTS_STATUS = 'dev/justinkase_hints/status';
+
+    const JK_TEMPLATE = '<div class="justinkase-hint"><span class="justinkase-hint-info type-%s">[%s] %s</span><div class="justinkase-hint-extra">%s</div>%s</div>';
 }
