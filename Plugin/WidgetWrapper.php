@@ -25,55 +25,20 @@ use Magento\Framework\View\Page\Config;
  *
  * @author Alex Ghiban <drew7721@gmail.com>
  */
-class WidgetWrapper implements WrapperInterface
+class WidgetWrapper extends AbstractWrapper
 {
-
-    /**
-     * @var ScopeConfigInterface $scopeConfig
-     */
-    protected $scopeConfig;
-
-    /**
-     * @var AppState $appState
-     */
-    private $appState;
-
-    /**
-     * @var Config
-     */
-    private $pageConfig;
-
-    /**
-     * BlockWrapper constructor.
-     *
-     * @param ScopeConfigInterface $scopeConfig
-     * @param Config $pageConfig
-     * @param AppState $appState
-     */
-    public function __construct(
-        ScopeConfigInterface $scopeConfig,
-        Config $pageConfig,
-        AppState $appState
-    ) {
-        $this->scopeConfig = $scopeConfig;
-        $this->appState = $appState;
-        $this->pageConfig = $pageConfig;
-    }
-
     public function afterProcess(DirectiveProcessorInterface $directiveProcessor, $result, array $construction, Template $filter, array $templateVariables)
     {
-        if ($this->scopeConfig->getValue(self::JK_CONFIG_BLOCK_HINTS_STATUS) && $this->isDeveloperMode()) {
-            $result = $this->wrapResult($directiveProcessor, $result, $construction, $filter, $templateVariables);
+        if ($this->isEnabled()) {
+            $result = $this->enhanceResult($directiveProcessor, $result, $construction, $filter, $templateVariables);
         }
 
         return $result;
     }
 
 
-    public function wrapResult(DirectiveProcessorInterface $directiveProcessor, $result, array $construction, Template $filter, array $templateVariables)
+    public function enhanceResult(DirectiveProcessorInterface $directiveProcessor, $result, array $construction, Template $filter, array $templateVariables)
     {
-
-
         $type = $construction[1];
         $widgetContent = $construction[0];
         $typeMatches = [];
@@ -86,35 +51,17 @@ class WidgetWrapper implements WrapperInterface
         $widgetContent = preg_replace($pattern, $replacement, $widgetContent);
 
         $extraData = [
-            'type' => $type,
-            'name' => $widgetClass,
-            'code' => $widgetContent
+            'Type' => $type,
+            'Name' => $widgetClass,
+            'Code' => $widgetContent
         ];
 
-        $extraDataHtml = '<ul>';
-        foreach ($extraData as $key => $value) {
-            $extraDataHtml .= "<li>$key => $value</li>";
-        }
-        $extraDataHtml .= '</ul>';
-
-
-        return sprintf(
-            self::JK_TEMPLATE,
-            $type,
+        return $this->wrapInTemplate(
             $type,
             $widgetClass,
-            $extraDataHtml,
-            $result
+            $result,
+            $extraData
         );
     }
 
-    /**
-     * Check if in developer mode.
-     *
-     * @return bool
-     */
-    private function isDeveloperMode()
-    {
-        return ($this->appState->getMode() === AppState::MODE_DEVELOPER);
-    }
 }

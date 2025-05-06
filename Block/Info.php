@@ -11,6 +11,7 @@ namespace JustinKase\LayoutHints\Block;
 
 use JustinKase\LayoutHints\Api\WrapperInterface;
 use Magento\Framework\View\Element\Template;
+use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class Info
@@ -19,6 +20,21 @@ use Magento\Framework\View\Element\Template;
  */
 class Info extends Template
 {
+
+    /**
+     * @var \JustinKase\LayoutHints\Block\StoreManagerInterface
+     */
+    protected StoreManagerInterface $storeManager;
+
+    public function __construct(
+        Template\Context $context,
+        StoreManagerInterface $storeManager,
+        array $data = [])
+    {
+        parent::__construct($context, $data);
+        $this->storeManager = $storeManager;
+    }
+
     /**
      * Use the sub construct class.
      *
@@ -42,6 +58,16 @@ class Info extends Template
     public function isDeveloperMode()
     {
         return $this->_appState->getMode() === $this->_appState::MODE_DEVELOPER;
+    }
+
+    public function getStoreCode(): string
+    {
+        $storeCode = $this->storeManager->getStore()->getCode();
+        if ($storeCode && !empty($storeCode)) {
+            return $storeCode . '/';
+        }
+
+        return '';
     }
 
     /**

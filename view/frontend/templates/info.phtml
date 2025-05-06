@@ -52,7 +52,7 @@
             var httpRequest;
             if (window.XMLHttpRequest) {
                 httpRequest = new XMLHttpRequest();
-                endpoint = window.location.origin + "/jkase?action=" + action;
+                endpoint = window.location.origin + "/<?= $block->getStoreCode(); ?>jkase?action=" + action;
                 httpRequest.onreadystatechange = function(){
                     if (httpRequest.readyState === XMLHttpRequest.DONE) {
                         if (httpRequest.status === 200) {

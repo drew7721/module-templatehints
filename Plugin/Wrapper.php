@@ -22,41 +22,8 @@ use Magento\Framework\View\Page\Config;
  *
  * @author Alex Ghiban <drew7721@gmail.com>
  */
-class Wrapper implements WrapperInterface
+class Wrapper extends AbstractWrapper
 {
-
-    /**
-     * @var ScopeConfigInterface $scopeConfig
-     */
-    protected $scopeConfig;
-
-    /**
-     * @var AppState $appState
-     */
-    private $appState;
-
-    /**
-     * @var Config
-     */
-    private $pageConfig;
-
-    /**
-     * BlockWrapper constructor.
-     *
-     * @param ScopeConfigInterface $scopeConfig
-     * @param Config $pageConfig
-     * @param AppState $appState
-     */
-    public function __construct(
-        ScopeConfigInterface $scopeConfig,
-        Config $pageConfig,
-        AppState $appState
-    ) {
-        $this->scopeConfig = $scopeConfig;
-        $this->appState = $appState;
-        $this->pageConfig = $pageConfig;
-    }
-
     /**
      * This wraps around all rendering of elements.
      *
@@ -73,30 +40,34 @@ class Wrapper implements WrapperInterface
         callable $proceed,
         $name
     ) {
-        if ($this->scopeConfig->getValue(self::JK_CONFIG_BLOCK_HINTS_STATUS) && $this->isDeveloperMode()) {
-            $result = $this->wrapResult($layout, $name, $proceed);
+        if ($this->isenabled()) {
+            return $this->enhanceResult($layout, $name, $proceed);
         } else {
-            $result = $proceed($name);
+            return $proceed($name);
         }
-
-        return $result;
     }
 
-    public function wrapResult(Layout $layout, $name, callable $proceed)
+    public function enhanceResult(Layout $layout, $name, callable $proceed)
     {
         $type = $layout->getElementProperty($name, 'type');
         $extraData = [
-            'type' => $type,
-            'name' => $name,
-            'alias' => $layout->getElementAlias($name),
-            'parent' => $layout->getParentName($name),
+            'Type' => $type,
+            'Name' => $name,
+            'Alias' => $layout->getElementAlias($name),
+            'Parent' => $layout->getParentName($name),
         ];
+
+        $htmlClass = $layout->getElementProperty($name, 'htmlClass');
+        if ($htmlClass) {
+            $extraData['Html Classes'] = $htmlClass ?? "NONE";
+        }
+
         $block = $layout->getBlock($name);
         if ($block) {
             $blockData = [
-                'template' => $block->getTemplate(),
-                'module_name' => $block->getModuleName(),
-                'class' => get_class($block),
+                'Template' => $block->getTemplate(),
+                'Module Name' => $block->getModuleName(),
+                'Class' => get_class($block),
             ];
 
             $group = $layout->getElementProperty($name, 'group');
@@ -106,30 +77,12 @@ class Wrapper implements WrapperInterface
 
             $extraData = array_merge($extraData, $blockData);
         }
-        $extraDataHtml = '<ul>';
-        foreach ($extraData as $key => $value) {
-            $extraDataHtml .= "<li>$key => $value</li>";
-        }
-        $extraDataHtml .= '</ul>';
 
-
-        return sprintf(
-            self::JK_TEMPLATE,
-            $type,
+        return $this->wrapInTemplate(
             $type,
             $name,
-            $extraDataHtml,
-            $proceed($name)
+            $proceed($name),
+            $extraData
         );
-    }
-
-    /**
-     * Check if in developer mode.
-     *
-     * @return bool
-     */
-    private function isDeveloperMode()
-    {
-        return ($this->appState->getMode() === AppState::MODE_DEVELOPER);
     }
 }
