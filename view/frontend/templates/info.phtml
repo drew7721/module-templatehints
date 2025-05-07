@@ -45,17 +45,6 @@
                         <li><b>Abstraction:</b> <?= $designAbstraction['design_abstraction']; ?></li>
                     </ul>
                 <?php endforeach; ?>
-                <h4>Page Blocks</h4>
-                <?php foreach ($block->getLayout()->getAllBlocks() as $blockName => $block): ?>
-                    <div>
-                        <h5><?= $blockName; ?></h5>
-                        <ul>
-                            <li><?= $block->getTemplateFile() ?></li>
-                            <li><?= $block->getTemplate() ?></li>
-                            <li><?= $block->getCacheKey() ?></li>
-                        </ul>
-                    </div>
-                <?php endforeach; ?>
             </div>
     <?php endif; ?>
 <script>
