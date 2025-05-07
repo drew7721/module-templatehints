@@ -3,7 +3,9 @@
  * Copyright © 2020
  * @copyright Alex Ghiban & JustinKase.ca - All rights reserved.
  * @license GPL-3.0-only
- * @see https://justinkase.ca or https://ghiban.com
+ * @see https://justinkase.ca
+ * @see https://ghiban.com
+ * @see https://alexghiban.me
  * @contact <alex@justinkase.ca>
  */
 
@@ -18,10 +20,42 @@
 <?php if ($block->isDeveloperMode()): ?>
     <?php if ($block->hintsAreEnabled()): ?>
             <div class="justinkase-hint-footer">
+                <h4>Page Information</h4>
+                <ul>
+                    <li><b>Cache Id:</b> <?= $block->getLayout()->getUpdate()->getCacheId(); ?></li>
+                </ul>
+
                 <h4>Used Layout Update Handles</h4>
-                <pre><?php  var_export($block->getLayout()->getUpdate()->getHandles());?></pre>
-                <h4>Suggested Available Containers</h4>
-                <pre><?php  var_export($block->getLayout()->getUpdate()->getContainers());?></pre>
+                <?php foreach($block->getLayout()->getUpdate()->getHandles() as $handle): ?>
+                    <ul>
+                        <li><code><?= $handle; ?></code></li>
+                    </ul>
+                <?php endforeach; ?>
+                <h4>Available Containers</h4>
+                <?php foreach($block->getLayout()->getUpdate()->getContainers() as $containerName => $container): ?>
+                    <ul>
+                        <li><code><?= $containerName; ?></code> => <b><?= $container ?></b></li>
+                    </ul>
+                <?php endforeach; ?>
+                <h4>Design Abstractions</h4>
+                <?php foreach ($block->getLayout()->getUpdate()->getAllDesignAbstractions() as $designAbstraction): ?>
+                    <ul>
+                        <li><b>Label:</b> <?= $designAbstraction['label']; ?></li>
+                        <li><b>Name:</b> <?= $designAbstraction['name']; ?></li>
+                        <li><b>Abstraction:</b> <?= $designAbstraction['design_abstraction']; ?></li>
+                    </ul>
+                <?php endforeach; ?>
+                <h4>Page Blocks</h4>
+                <?php foreach ($block->getLayout()->getAllBlocks() as $blockName => $block): ?>
+                    <div>
+                        <h5><?= $blockName; ?></h5>
+                        <ul>
+                            <li><?= $block->getTemplateFile() ?></li>
+                            <li><?= $block->getTemplate() ?></li>
+                            <li><?= $block->getCacheKey() ?></li>
+                        </ul>
+                    </div>
+                <?php endforeach; ?>
             </div>
     <?php endif; ?>
 <script>

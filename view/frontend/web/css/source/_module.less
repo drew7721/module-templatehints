@@ -63,7 +63,6 @@ body.justinkase-hints-enabled {
             &.type-container {
                 background-color: @jk_color_container_glow;
                 & + .justinkase-hint-extra {
-                    border-color: @jk_color_container_glow_border;
                     background: linear-gradient(@jk_gradient_degree, @jk_color_white 50%, @jk_color_container_glow 100%);
                 }
             }
@@ -71,7 +70,6 @@ body.justinkase-hints-enabled {
             &.type-block {
                 background-color: @jk_color_block_glow;
                 & + .justinkase-hint-extra {
-                    border-color: @jk_color_block_glow_border;
                     background: linear-gradient(@jk_gradient_degree, @jk_color_white 50%, @jk_color_block_glow 100%);
                 }
             }
@@ -79,7 +77,6 @@ body.justinkase-hints-enabled {
             &.type-uiComponent {
                 background-color: @jk_color_uiComponent_glow;
                 & + .justinkase-hint-extra {
-                    border-color: @jk_color_uiComponent_glow_border;
                     background: linear-gradient(@jk_gradient_degree, @jk_color_white 50%, @jk_color_uiComponent_glow 100%);
                 }
             }
@@ -87,7 +84,6 @@ body.justinkase-hints-enabled {
             &.type-widget {
                 background-color: @jk_color_widget_glow;
                 & + .justinkase-hint-extra {
-                    border-color: @jk_color_widget_glow_border;
                     background: linear-gradient(@jk_gradient_degree, @jk_color_white 50%, @jk_color_widget_glow 100%);
                 }
             }
@@ -101,7 +97,7 @@ body.justinkase-hints-enabled {
             background-color: @jk_color_dirty_white;
             color: @jk_color_dark_black;
             padding: 0.5rem;
-            border: solid 1px;
+            border: solid 4px @jk_color_white;
             font-size: x-small;
             margin: 5px;
             box-shadow: 3px 3px 5px -3px @jk_color_shadow;

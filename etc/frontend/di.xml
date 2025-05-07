@@ -12,6 +12,6 @@
         <plugin name="justinkase_templatehints" type="JustinKase\LayoutHints\Plugin\Wrapper" sortOrder="10"/>
     </type>
     <type name="Magento\Framework\Filter\DirectiveProcessorInterface">
-        <plugin name="justinkase_templatehints_widget" type="JustinKase\LayoutHints\Plugin\WidgetWrapper" sortOrder="1"/>
+        <plugin name="justinkase_templatehints_widget" type="JustinKase\LayoutHints\Plugin\WidgetWrapper" sortOrder="10"/>
     </type>
 </config>
