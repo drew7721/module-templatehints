@@ -74,6 +74,7 @@ abstract class AbstractWrapper implements WrapperInterface
     {
         return sprintf(
             self::JK_TEMPLATE,
+            $identifier,
             $type,
             $type,
             $identifier,

@@ -19,33 +19,93 @@
 ?>
 <?php if ($block->isDeveloperMode()): ?>
     <?php if ($block->hintsAreEnabled()): ?>
-            <div class="justinkase-hint-footer">
-                <h4>Page Information</h4>
-                <ul>
-                    <li><b>Cache Id:</b> <?= $block->getLayout()->getUpdate()->getCacheId(); ?></li>
-                </ul>
-
-                <h4>Used Layout Update Handles</h4>
-                <?php foreach($block->getLayout()->getUpdate()->getHandles() as $handle): ?>
-                    <ul>
-                        <li><code><?= $handle; ?></code></li>
-                    </ul>
-                <?php endforeach; ?>
-                <h4>Available Containers</h4>
-                <?php foreach($block->getLayout()->getUpdate()->getContainers() as $containerName => $container): ?>
-                    <ul>
-                        <li><code><?= $containerName; ?></code> => <b><?= $container ?></b></li>
-                    </ul>
-                <?php endforeach; ?>
-                <h4>Design Abstractions</h4>
-                <?php foreach ($block->getLayout()->getUpdate()->getAllDesignAbstractions() as $designAbstraction): ?>
-                    <ul>
-                        <li><b>Label:</b> <?= $designAbstraction['label']; ?></li>
-                        <li><b>Name:</b> <?= $designAbstraction['name']; ?></li>
-                        <li><b>Abstraction:</b> <?= $designAbstraction['design_abstraction']; ?></li>
-                    </ul>
-                <?php endforeach; ?>
+        <a class="justinkase-jump-to-page-info" href="#jk-page-information">Page Info</a>
+        <div class="justinkase-hint-footer">
+            <h4 id="jk-page-information">JustinKase - Layout Information</h4>
+            <div>
+                <b>Layout Cache ID</b>: <code><?= $block->getLayout()->getUpdate()->getCacheId(); ?></code>
             </div>
+            <ul>
+                <li>
+                    <a href="#jk-used-layout-update-handles">Used <?= count($block->getLayout()->getUpdate()->getHandles()) ?> Layout Update Handles</a>
+                </li>
+                <li>
+                    <a href="#jk-available-containers">Used <?= count($block->getLayout()->getUpdate()->getContainers()) ?> Containers</a>
+                </li>
+                <li>
+                    <a href="#jk-available-blocks">Used <?= count($block->getLayout()->getAllBlocks()) ?> Blocks</a>
+                </li>
+                <li>
+                    <a href="#jk-available-design-abstractions">Used <?= count($block->getLayout()->getUpdate()->getAllDesignAbstractions()) ?> Design Abstractions</a>
+                </li>
+            </ul>
+
+            <hr/>
+            <h4 id="jk-used-layout-update-handles">Layout Update Handles </h4>
+            <?php foreach($block->getLayout()->getUpdate()->getHandles() as $handle): ?>
+                <ul>
+                    <li><code><?= $handle; ?></code></li>
+                </ul>
+            <?php endforeach; ?>
+
+            <h4 id="jk-available-containers">Containers</h4>
+            <div class="jusinkase-all-blocks-info">
+            <?php foreach($block->getLayout()->getUpdate()->getContainers() as $containerName => $container): ?>
+                <a class="justinkase-block-info type-container" href="#<?=$containerName?>">
+                    <code><?= $containerName; ?></code>
+                    <br/>
+                    <b><?= $container ?></b>
+                </a>
+            <?php endforeach; ?>
+            </div>
+
+            <hr/>
+            <h4 id="jk-available-blocks">Blocks</h4>
+            <div class="jusinkase-all-blocks-info">
+            <?php foreach ($block->getLayout()->getAllBlocks() as $block): ?>
+                <?php
+                $type = 'block';
+                $cacheKeyInfo = null;
+                $cacheKey = null;
+                if ($block->hasData('id') || $block->hasData('block_id')) {
+                    try {
+                        $cacheKey = $block->getCacheKey();
+                        $cacheKeyInfo = $block->getCacheKeyInfo();
+                    } catch (\Exception $e) {
+                        // Handle exception if needed
+                    }
+                }
+                if (strpos(get_class($block), '\Cms\Block\Block') !== false) {
+                    $type = 'cms-block';
+                }
+                ?>
+                <span class="justinkase-block-info type-<?= $type; ?>">
+                    <a href="#<?= $block->getNameInLayout() ?>">
+                        <?= $block->getNameInLayout() ?>
+                    </a>
+                    <div class="justinkase-block-info-extra">
+                        <b><?= $block->getNameInLayout() ?></b>
+                        <div><b>Class:</b> <?= get_class($block); ?></div>
+                        <div><b>Template:</b> <?= $block->getTemplate(); ?></div>
+                        <div><b>Type:</b> <?= $block->getType() ?? 'N/A'; ?></div>
+                        <div><b>Alias:</b> <?= $block->getLayout()->getElementAlias($block->getNameInLayout()) ?? 'N/A'; ?></div>
+                        <div><b>Name:</b> <?= $block->getNameInLayout() ?? 'N/A'; ?></div>
+                        <div><b>Cache Key:</b> <?= var_dump($cacheKey) ?? 'N/A'; ?></div>
+                        <div><b>Cache Key Info:</b> <?= var_dump($cacheKeyInfo) ?? 'N/A'; ?></div>
+                    </div>
+                </span>
+            <?php endforeach; ?>
+            </div>
+            <hr/>
+            <h4 id="jk-available-design-abstractions">Design Abstractions</h4>
+            <?php foreach ($block->getLayout()->getUpdate()->getAllDesignAbstractions() as $designAbstraction): ?>
+                <ul>
+                    <li><b>Label:</b> <?= $designAbstraction['label']; ?></li>
+                    <li><b>Name:</b> <?= $designAbstraction['name']; ?></li>
+                    <li><b>Abstraction:</b> <?= $designAbstraction['design_abstraction']; ?></li>
+                </ul>
+            <?php endforeach; ?>
+        </div>
     <?php endif; ?>
 <script>
     (function(){
