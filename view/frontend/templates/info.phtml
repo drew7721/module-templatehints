@@ -87,6 +87,7 @@
                         <b><?= $block->getNameInLayout() ?></b>
                         <div><b>Class:</b> <?= get_class($block); ?></div>
                         <div><b>Template:</b> <?= $block->getTemplate(); ?></div>
+                        <div><b>Block Id:</b> <?= $block->getBlockId() ?? 'N/A'; ?></div>
                         <div><b>Type:</b> <?= $block->getType() ?? 'N/A'; ?></div>
                         <div><b>Alias:</b> <?= $block->getLayout()->getElementAlias($block->getNameInLayout()) ?? 'N/A'; ?></div>
                         <div><b>Name:</b> <?= $block->getNameInLayout() ?? 'N/A'; ?></div>

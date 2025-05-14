@@ -29,6 +29,7 @@ class CmsBlockWrapper extends AbstractWrapper
         $name = $block->getNameInLayout();
         $extraData = [
             'Type' => 'CMS Block',
+            'Block Id' => $block->getBlockId(),
             'Name' => $name,
             'Module' => $block->getModuleName(),
         ];
